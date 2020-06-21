@@ -1,7 +1,9 @@
 {
-  "name": "fdp-react-ts-template",
+  "name": "{{name}}",
   "version": "0.1.0",
   "private": true,
+  "description": "{{description}}",
+  "author": "{{author}}",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
