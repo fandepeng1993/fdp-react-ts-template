@@ -1,26 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+    IntlProvider,
+    FormattedMessage,
+} from 'react-intl';
+import languages from "./lang";
+import {ConfigProvider} from 'antd';
+import './style/index.less';
+import {Button} from 'antd';
+import {Popconfirm} from 'antd';
+
+type Lang = 'zh' | 'en';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [lang, setLang] = React.useState<Lang>('zh');
+    const [antdLocale, setAntdLocale] = React.useState(languages[`ant_${lang}`]);
+    const [locale, setLocale] = React.useState(languages[lang]);
+    const changeLanguage = () => {
+        setLang('en')
+    };
+    React.useEffect(() => {
+        setAntdLocale(languages[`ant_${lang}`]);
+        setLocale(languages[lang]);
+    }, [lang]);
+
+    return (
+        <IntlProvider key="intl" locale={lang} messages={locale}>
+            <ConfigProvider locale={antdLocale}>
+                <div className="App">
+                    <p>this is a template</p>
+                    <Button type="primary" onClick={changeLanguage}>hello</Button>
+                    <Popconfirm title="Question?">
+                        <a href="#">Click to confirm</a>
+                    </Popconfirm>
+                    <span>
+                       <FormattedMessage id="hello"/>
+                   </span>
+                </div>
+            </ConfigProvider>
+        </IntlProvider>
+
+    );
 }
 
 export default App;
