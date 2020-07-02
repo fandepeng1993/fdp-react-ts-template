@@ -2,7 +2,13 @@ const {override, fixBabelImports, addLessLoader, addWebpackPlugin, addWebpackAli
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin'); // 减少包的体积
 const path = require('path');
 const theme = require('./theme');
+const PKG = require('../package.json');
+if (!Intl.PluralRules) {
+  require('@formatjs/intl-pluralrules/polyfill');
+  require('@formatjs/intl-pluralrules/dist/locale-data/de'); // Add locale data for de
+}
 
+// console.log(path.join(__dirname, '../src'),'asdasdasdasdasdasdasd');
 module.exports = override(
   fixBabelImports('import', {
     libraryName: 'antd',
@@ -24,22 +30,21 @@ module.exports = override(
   addWebpackPlugin(new AntdDayjsWebpackPlugin()),
   //别名配置
   addWebpackAlias({
-    '@': path.join(__dirname, './src'),
-    '@actions': path.join(__dirname, './src/actions'),
-    '@api': path.join(__dirname, './src/api'),
-    '@common': path.join(__dirname, './src/common'),
-    '@components': path.join(__dirname, './src/components'),
-    '@layout': path.join(__dirname, './src/layout'),
-    '@pages': path.join(__dirname, './src/pages'),
-    '@router': path.join(__dirname, './src/router'),
-    '@store': path.join(__dirname, './src/store'),
-    '@utils': path.join(__dirname, './src/utils')
+    '@': path.join(__dirname, '../src')
   }),
   //装饰器配置项
   addDecoratorsLegacy(),
   (config) => { //暴露webpack的配置 config ,evn
     // 去掉打包生产map 文件
     // config.devtool = config.mode === 'development' ? 'cheap-module-source-map' : false;
+
+    const paths = require('react-scripts/config/paths');
+    // 配置打包目录输出到dist/PKG.name
+    paths.appBuild = path.join(path.dirname(paths.appBuild), `dist/${PKG.name}`);
+    config.output.path = paths.appBuild;
+    /* paths.publicUrlOrPath = './';
+    config.output.publicPath = './'; */
+
     if (process.env.NODE_ENV === 'production') {
       config.devtool = false;
     }

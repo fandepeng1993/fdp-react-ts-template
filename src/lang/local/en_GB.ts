@@ -2,6 +2,6 @@
 
 const en_GB = {
     // ...enGB,
-    hello: 'Hello',
+    hello: 'Hello, name is {{name}}',
 };
 export default en_GB;
