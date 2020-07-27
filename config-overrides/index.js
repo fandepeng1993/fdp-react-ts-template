@@ -19,7 +19,9 @@ module.exports = override(
   addLessLoader({
     // javascriptEnabled: true,
     lessOptions: {
+      modules: {localIdentName: '[name]_[local]_[hash:base64:5]'},
       javascriptEnabled: true,
+      // localIdentName: "[local]--[hash:base64:5]",
       modifyVars: {
         //自定义less 颜色 建议 用less文件修改，不建议在这更改
         // '@primary-color': 'red',
@@ -27,6 +29,7 @@ module.exports = override(
       }
     }
   }),
+  // Day.js 替换 moment.js
   addWebpackPlugin(new AntdDayjsWebpackPlugin()),
   //别名配置
   addWebpackAlias({
@@ -42,6 +45,15 @@ module.exports = override(
     // 配置打包目录输出到dist/PKG.name
     paths.appBuild = path.join(path.dirname(paths.appBuild), `dist/${PKG.name}`);
     config.output.path = paths.appBuild;
+    console.log(config.devServer);
+    config.devServer = {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:4000',
+          pathRewrite: {'^/api': ''}
+        }
+      }
+    };
     /* paths.publicUrlOrPath = './';
     config.output.publicPath = './'; */
 

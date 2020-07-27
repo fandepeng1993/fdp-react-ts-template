@@ -1,4 +1,6 @@
 import React from "react";
+import styles from './index.module.less';
+import {Button} from "antd";
 
 const isLogin = true;
 const Login = () => {
@@ -6,8 +8,9 @@ const Login = () => {
         window.location.href='/my'
     }*/
     return (
-        <div>
+        <div className={styles.color}>
             Login
+            <Button type="default">123213123</Button>
         </div>
     )
 

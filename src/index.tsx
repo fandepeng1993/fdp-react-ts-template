@@ -10,6 +10,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import '@/lang/index';
+import '@/style/index.less'
 
 ReactDOM.render(
     <App/>,
