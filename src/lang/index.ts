@@ -8,11 +8,17 @@ import en from "@/lang/local/en_GB";
 // (tip move them in a JSON file and import them)
 const resources = {
     zh: {
-        translation: zh
+        translation: zh,
+        test:{
+            'language':'中文  语言'
+        }
 
     },
     en: {
-        translation: en
+        translation: en,
+        test:{
+            'language':'english language'
+        }
 
     }
 };
@@ -21,7 +27,7 @@ i18n.use(initReactI18next) // passes i18n down to react-i18next
     .init({
         resources,
         lng: getLang(),
-        keySeparator: false, // we do not use keys in form messages.welcome
+        // keySeparator: false, // we do not use keys in form messages.welcome
         interpolation: {
             escapeValue: false // react already safes from xss
         }

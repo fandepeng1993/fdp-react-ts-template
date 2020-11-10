@@ -1,11 +1,36 @@
 import React from "react";
 import {Route, RouteProps, Redirect} from 'react-router-dom';
-import Login from "@/pages/login";
-import Layout from "@/layout/mian";
-import MyPage from "@/pages/mypage";
-import OtherPage from "@/pages/otherPage";
+import RouterGuard from "@/layout/RouterGuard";
+import Login from '@/pages/login';
+import Home from '@/pages/home';
+import Layout from '@/layout/main';
 
-const router: RouteProps[] = [
+type RouterPropsCustom = RouteProps & { Auth?: Boolean, isToggleHeader?: Boolean,AuthStatus?:boolean }
+const router: RouterPropsCustom[] = [
+    {
+        path: "/",
+        exact: true,
+        component: Home,
+        isToggleHeader:true
+    },
+    {
+        path: '/main',
+        component: Layout,
+        // exact: true,
+        AuthStatus: true,
+        Auth: true,
+        children: [
+            {
+                path: "/main/appManage",
+                // exact: true,
+                component: <div>main - appManage</div>
+            },
+            {
+                path: "*",
+                component: () => (<Redirect to="/main/appManage"/>)
+            },
+        ],
+    },
     {
         path: "/login",
         exact: true,
@@ -17,33 +42,11 @@ const router: RouteProps[] = [
         component: () => (<div>404页面</div>)
     },
     {
-        path: "/",
-        component: Layout,
-        children: [
-            {
-                path: "/my",
-                // exact: true,
-                component: MyPage
-            },
-            {
-                path: "/other",
-                // exact: true,
-                component: OtherPage
-            },
-           /* {
-                path: "*",
-                // exact:true,
-                component: () => (<Redirect to="404"/>)
-            }, */
-        ],
-    },
-
+        path: "*",
+        component: () => (<Redirect to="/"/>)
+    }
 ];
-
-export const RouteWithSubRoutes = (route: any) => (
-    <Route
-        path={route.path}
-        render={props => (<route.component {...props} routes={route.children}/>)}
-    />
-);
+export const RouteWithSubRoutes: any = (route: any) => (
+    <Route path={route.path} render={props => (<RouterGuard {...props} route={route}/>)}
+    />);
 export default router;

@@ -9,11 +9,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {Provider} from 'react-redux';
+import {store, persistor} from '@/store';
 import '@/lang/index';
-import '@/style/index.less'
+import '@/style/index.less';
+import 'nprogress/nprogress.css';
+import PKG from '../package.json';
+import {PersistGate} from "redux-persist/integration/react";
 
+console.log('当前版本：' + PKG.version);
 ReactDOM.render(
-    <App/>,
+    <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            <App/>
+        </PersistGate>
+    </Provider>,
     document.getElementById('root')
 );
 

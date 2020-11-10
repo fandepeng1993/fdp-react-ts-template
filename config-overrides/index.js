@@ -1,14 +1,17 @@
 const {override, fixBabelImports, addLessLoader, addWebpackPlugin, addWebpackAlias, addDecoratorsLegacy} = require('customize-cra');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin'); // 减少包的体积
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+const CompressionPlugin = require('compression-webpack-plugin');
 const path = require('path');
 const theme = require('./theme');
 const PKG = require('../package.json');
-if (!Intl.PluralRules) {
-  require('@formatjs/intl-pluralrules/polyfill');
-  require('@formatjs/intl-pluralrules/dist/locale-data/de'); // Add locale data for de
-}
+const analyze = process.env.REACT_APP_ANALYZE; //是否分析打包数据
+// if (!Intl.PluralRules) {
+//   require('@formatjs/intl-pluralrules/polyfill');
+//   require('@formatjs/intl-pluralrules/dist/locale-data/de'); // Add locale data for de
+// }
 
-// console.log(path.join(__dirname, '../src'),'asdasdasdasdasdasdasd');
+if (process.env.NODE_ENV === 'production') process.env.GENERATE_SOURCEMAP = 'false';
 module.exports = override(
   fixBabelImports('import', {
     libraryName: 'antd',
@@ -31,6 +34,7 @@ module.exports = override(
   }),
   // Day.js 替换 moment.js
   addWebpackPlugin(new AntdDayjsWebpackPlugin()),
+  analyze && addWebpackPlugin(new BundleAnalyzerPlugin()),
   //别名配置
   addWebpackAlias({
     '@': path.join(__dirname, '../src')
@@ -46,6 +50,7 @@ module.exports = override(
     paths.appBuild = path.join(path.dirname(paths.appBuild), `dist/${PKG.name}`);
     config.output.path = paths.appBuild;
     console.log(config.devServer);
+    // 服务器开发环境带来mock数据
     config.devServer = {
       proxy: {
         '/api': {
@@ -72,11 +77,9 @@ module.exports = override(
     loaders[5].use.push({
       loader: 'sass-resources-loader',
       options: {
-        resources: path.resolve(__dirname, 'src/asset/base.scss')//全局引入公共的scss 文件
+        // resources: path.resolve(__dirname, 'src/asset/base.scss')//全局引入公共的scss 文件
       }
     });
-
-
     return config;
   }
 );
