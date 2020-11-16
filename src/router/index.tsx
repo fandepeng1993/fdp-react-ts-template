@@ -21,13 +21,23 @@ const router: RouterPropsCustom[] = [
         Auth: true,
         children: [
             {
-                path: "/main/appManage",
+                path: "/main/option1",
                 // exact: true,
-                component: <div>main - appManage</div>
+                component: ()=><div>main - option1</div>
+            },
+            {
+                path: "/main/option5",
+                // exact: true,
+                component: ()=><div>main - option5</div>
+            },
+            {
+                path: "/main/option9",
+                // exact: true,
+                component: ()=><div>main - option9</div>
             },
             {
                 path: "*",
-                component: () => (<Redirect to="/main/appManage"/>)
+                component: () => (<Redirect to="/main/option1"/>)
             },
         ],
     },

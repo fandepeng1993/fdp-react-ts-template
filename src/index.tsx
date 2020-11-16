@@ -4,7 +4,10 @@ import 'core-js/es/map';
 import 'core-js/es/set'; */
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/stable';
+// 该注释是用来修改mock 在开发环境下生效 配置文件在run.js 中配置
+/* @dynamic mock */
 
+import './mock';/* @dynamic end */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -16,12 +19,17 @@ import '@/style/index.less';
 import 'nprogress/nprogress.css';
 import PKG from '../package.json';
 import {PersistGate} from "redux-persist/integration/react";
+import ErrorBoundary from "@/layout/ErrorBoundary";
+
+
 
 console.log('当前版本：' + PKG.version);
 ReactDOM.render(
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-            <App/>
+            <ErrorBoundary>
+                <App/>
+            </ErrorBoundary>
         </PersistGate>
     </Provider>,
     document.getElementById('root')

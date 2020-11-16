@@ -1,15 +1,15 @@
-import {call, put, takeLatest,takeEvery} from 'redux-saga/effects';
+import {call, put, takeLatest} from 'redux-saga/effects';
 import {CURRENTER} from '@/store/actions';
-import {getUserInfo} from '@/services'
+import {getCurrentUser} from '@/services'
 import {removeToken} from "@/utils/cookie";
 
 // workder Saga : 将在 USER_FETCH_REQUESTED action 被发起时调用
 function* fetchUser(action: any) {
     try {
         // console.log('redux 获取用户信息');
-        const user = yield call(getUserInfo);
-        // console.log(user);
-        yield put({type: CURRENTER.UPDATECURRENTER, payload: user.data});
+        const {data} = yield call(getCurrentUser);
+        // console.log(data,'response:getCurrentUser');
+        yield put({type: CURRENTER.UPDATECURRENTER, payload: data});
     } catch (e) {
         removeToken();
         window.location.reload();

@@ -1,11 +1,20 @@
-
 const en_GB = {
-    hello: 'Hello, name is {{name}}',
-    namespace1: {
-        key: 'hello from namespace 1'
+    hello: '✋✋✋ Hello, your project name is {{name}}',
+    "<0>Welcome to React</0>": "<0> 🙌 🙌 🙌Welcome use@frid/fdp-cli create webapp 🙌 🙌 🙌</0>",
+    namespace: {
+        code: 'npx @frid/fdp-cli init ProjectName',
+        lang: 'Language',
+        'zh-CN': 'Chinese',
+        'en-GB': 'English'
     },
-    key: 'hello from key 1',
-    appManagement:'App Management',
-    appList:'App List',
+    loginForm:{
+        username:'Please input your Username',
+        password:'Please input your Password',
+    },
+    header: {
+        manager: 'Manager',
+        login: 'Login',
+        logout: 'Logout'
+    }
 };
 export default en_GB;

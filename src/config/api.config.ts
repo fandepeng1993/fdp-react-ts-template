@@ -1,8 +1,8 @@
-const REST = '/rest';
+const Mock = '/mock';
 
 const API_CONFIG = {
-    /* 模板 */
-    template: `${REST}/design/page/list`,
-
+    /*登陆*/
+    login: `${Mock}/login`,
+    getCurrentUser: `${Mock}/getCurrentUser`,
 };
 export default API_CONFIG
