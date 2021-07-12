@@ -12,8 +12,8 @@ NProgress.configure({showSpinner: false});
 const axiosInstance = axios.create({
     // 基准请求地址url
     /*⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️*/
-    // 1.proxy代理只在开发dev生效，mockjs数据用的。开发环境的baseURL为 /api/开头，由于开了proxy所以出现代理将/api/过滤掉
-    // 2.其他环境下多环境打包。则根据环境变量数据配置基准baseURL，mock 和 proxy 失效
+    // 1.proxy代理只在开发development生效，可以搭配是否开启mockjs数据用的。开发环境（development）的baseURL为 /api/开头，由于开了proxy所以出现代理将/api/过滤掉
+    // 2.其他环境下多环境打包。则根据环境变量数据配置基准baseURL，mockjs（关闭） 和 proxy 失效
     baseURL: process.env.NODE_ENV === 'development' ? '/api' : BASEURL,
     /*⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️*/
     // 网络请求时间

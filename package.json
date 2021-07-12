@@ -34,14 +34,20 @@
   },
   "scripts": {
     "analyz": "cross-env REACT_APP_ANALYZE=true  react-app-rewired build",
-    "start": "node run dev && cross-env PORT=7200 react-app-rewired start",
-    "build": "node run && react-app-rewired build",
+    "start": "npm run start:mock_local",
+    "start:mock_local": "node run mock && cross-env PORT=7201 REACT_APP_ENV=local react-app-rewired start",
+    "start:nomock_local": "node run && cross-env PORT=7202 REACT_APP_ENV=local react-app-rewired start",
+    "start:mock_dev": "node run mock && cross-env PORT=7200 react-app-rewired start",
+    "start:nomock_dev": "node run && cross-env PORT=7203 REACT_APP_ENV=dev react-app-rewired start",
+    "start:nomock_test": "node run && cross-env PORT=7204 REACT_APP_ENV=test react-app-rewired start",
+    "start:nomock_approval": "node run && cross-env PORT=7205 REACT_APP_ENV=approvall react-app-rewired start",
+    "start:nomock_prod": "node run && cross-env PORT=7206 REACT_APP_ENV=prod react-app-rewired start",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "build-env-dev": "node run && cross-env REACT_APP_ENV=dev react-app-rewired build",
-    "build-env-test": "node run && cross-env REACT_APP_ENV=test react-app-rewired build",
-    "build-env-approval": "node run && cross-env REACT_APP_ENV=approval react-app-rewired build",
-    "build-env-prod": "node run && cross-env REACT_APP_ENV=prod react-app-rewired build"
+    "build-env:dev": "node run && cross-env REACT_APP_ENV=dev react-app-rewired build",
+    "build-env:test": "node run && cross-env REACT_APP_ENV=test react-app-rewired build",
+    "build-env:approval": "node run && cross-env REACT_APP_ENV=approval react-app-rewired build",
+    "build-env:prod": "node run && cross-env REACT_APP_ENV=prod react-app-rewired build"
   },
   "eslintConfig": {
     "extends": "react-app"

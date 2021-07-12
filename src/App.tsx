@@ -19,6 +19,7 @@ const antLangEnum = {
 
 function App() {
     const lng: Lang = useSelector((state: any) => state.language);
+
     const {i18n} = useTranslation();
     const dispatch = useDispatch();
     React.useEffect(() => {
@@ -29,13 +30,13 @@ function App() {
             dispatch({type: CURRENTER.GETCURRENTER});
         }
     }, [dispatch]);
+
     React.useEffect(() => {
-        // console.log(lng, 'asdasdasdasdasdasdasd--------')
         // 设置antd 中英文
         // 设置react-i18next 中英文
         i18n.changeLanguage(lng);
         dispatch({type: UPDATELANGUAGE, payload: lng});
-    }, [i18n, lng,dispatch]);
+    }, [i18n, lng, dispatch]);
 
     return (
         <ConfigProvider locale={antLangEnum[lng]}>

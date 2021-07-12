@@ -57,16 +57,6 @@ module.exports = override(
     // 配置打包目录输出到dist/PKG.name
     paths.appBuild = path.join(path.dirname(paths.appBuild), `dist/${PKG.name}`);
     config.output.path = paths.appBuild;
-    // console.log(config.devServer);
-    // 服务器开发环境带来mock数据
-    config.devServer = {
-      // proxy: {
-      //   '/api': {
-      //     target: 'http://localhost:4000',
-      //     pathRewrite: {'^/api': ''}
-      //   }
-      // }
-    };
     /* paths.publicUrlOrPath = './';
     config.output.publicPath = './'; */
 

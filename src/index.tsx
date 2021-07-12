@@ -5,6 +5,7 @@ import 'core-js/es/set'; */
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/stable';
 // 该注释是用来修改mock 在开发环境下生效 配置文件在run.js 中配置
+/* 可以动态配置是否在开发环境中不使用自定义的mock数据，直接和后端联调 只需要在setupProxy中配置 */
 /* @dynamic mock */
 
 import './mock';/* @dynamic end */

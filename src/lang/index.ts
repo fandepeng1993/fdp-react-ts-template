@@ -12,6 +12,7 @@ const resources = {
         title: {
             'title1': '1. 快速创建兼容IE9的React,typescript,redux-saga,react-router,react-i18next多语言切换的SPA的web项目',
             'title2': '2. 简介',
+            'title3': '3. 注意',
             content: {
                 '<0>content1</0>': '<0>1.繁琐于重复构建项目模版修改，于是开发了{{tool}}手脚架和模版项目，用于快速构建新的项目，少量去修改项目配置。</0>',
                 '<0>content2</0>': '<0>2.由于{{Intl}}对IE8-11 部分功能已经放弃兼容，故而使用了{{i18next}}做国际化。</0>',
@@ -31,6 +32,7 @@ const resources = {
         title: {
             'title1': '1. Quickly create WEB projects for IE9 compatible React, Typescript, ReDUx-Saga, React - Router, React - I18Next Multi-language switching SPA',
             'title2': '2. Introduction',
+            'title3': '3. Notice',
             content: {
                 '<0>content1</0>': '<0>1.Cumbersome repetitive construction project template modification, so developed {{tool}} frame and template project, for the rapid construction of new projects, to modify the project configuration.</0>',
                 '<0>content2</0>': '<0>2.Since {{Intl}} has given up its compatibility with part of IE8-11, so {{i18next}} is used for internationalization.</0>',

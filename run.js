@@ -1,6 +1,6 @@
 /* v 0.0.1 */
 const fs = require('fs');
-const env = process.argv[2] || '';// dev 调试模式
+const mock = process.argv[2] || '';// mock 调试模式
 
 const indexPath = './src/index.tsx';
 const data = fs.readFileSync(indexPath);
@@ -8,7 +8,7 @@ const index = data.toString().replace(/(\/\* @dynamic (.*?) \*\/\n*\n*\r*\s*\t*)
   let code = '';
   switch (s2) {
     case 'mock':
-      code = env === 'dev' ? `import './mock';` : ``;
+      code = mock === 'mock' ? `import './mock';` : ``;
   }
   return `${s1}${code}${s4}`;
 });
